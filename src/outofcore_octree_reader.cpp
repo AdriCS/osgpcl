@@ -200,6 +200,7 @@ namespace osgpcl
       isRoot_(true),depth_(0), max_depth_(0), depth_set_(false),
       bbmin_(0,0,0),bbmax_(0,0,0), isLeaf_(false)
   {
+      addCacheHint( osgDB::Options::CACHE_NODES );
   }
 
   OutofCoreOctreeReader::OutOfCoreOptions::OutOfCoreOptions (
@@ -207,6 +208,7 @@ namespace osgpcl
           isRoot_(true),depth_(0), max_depth_(0), depth_set_(false),
           bbmin_(0,0,0),bbmax_(0,0,0), isLeaf_(false)
   {
+      addCacheHint( osgDB::Options::CACHE_NODES );
   }
 
   OutofCoreOctreeReader::OutOfCoreOptions::OutOfCoreOptions (
@@ -214,6 +216,7 @@ namespace osgpcl
           CloudReaderOptions(factory, 1), isRoot_(true),depth_(0), max_depth_(0),
           depth_set_(false),  bbmin_(0,0,0),bbmax_(0,0,0), isLeaf_(false)
   {
+      addCacheHint( osgDB::Options::CACHE_NODES );
     this->init( _octree );
   }
 
@@ -283,6 +286,8 @@ namespace osgpcl
     this->sampling_rate_ = options.sampling_rate_;
     this->isLeaf_ = options.isLeaf_;
     this->depth_set_ = options.depth_set_;
+
+      this->setObjectCacheHint( options.getObjectCacheHint() );
   }
 
   void OutofCoreOctreeReader::OutOfCoreOptions::getBoundingBox (
@@ -290,6 +295,16 @@ namespace osgpcl
   {
     bbmin = bbmin_;
     bbmax = bbmax_;
+  }
+
+  void OutofCoreOctreeReader::OutOfCoreOptions::addCacheHint (
+  const osgDB::Options::CacheHintOptions cho)
+  {
+    const osgDB::Options::CacheHintOptions cacheHint =
+    static_cast<osgDB::Options::CacheHintOptions>( getObjectCacheHint()
+                                                   | cho )
+    ;
+    setObjectCacheHint( cacheHint );
   }
 
 }
