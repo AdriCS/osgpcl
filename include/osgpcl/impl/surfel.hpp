@@ -113,13 +113,13 @@ osg::Geometry* osgpcl::SurfelFactory<PointT, NormalT>:: buildGeometry(bool uniqu
 
 template<typename PointT, typename NormalT>
 inline void osgpcl::SurfelFactory<PointT, NormalT>::setInputCloud(
-        const pcl::PCLPointCloud2::ConstPtr& cloud) {
+        const sensor_msgs::PointCloud2::ConstPtr& cloud) {
       typename pcl::PointCloud<PointT>::Ptr xyz(new pcl::PointCloud<PointT>);
-      pcl::fromPCLPointCloud2(*cloud,*xyz);
+      pcl::fromROSMsg(*cloud,*xyz);
       PointCloudFactory::setInputCloud<PointT>(xyz);
 
       typename pcl::PointCloud<NormalT>::Ptr norms(new pcl::PointCloud<NormalT>);
-      pcl::fromPCLPointCloud2(*cloud,*norms);
+      pcl::fromROSMsg(*cloud,*norms);
       PointCloudFactory::setInputCloud<NormalT>(norms);
 
 }
@@ -255,17 +255,17 @@ osg::Geometry* osgpcl::SurfelFactoryI<PointT, NormalT, IntensityT>::buildGeometr
 
 template<typename PointT, typename NormalT, typename IntensityT>
 inline void osgpcl::SurfelFactoryI<PointT, NormalT, IntensityT>::setInputCloud(
-        const pcl::PCLPointCloud2::ConstPtr& cloud) {
+        const sensor_msgs::PointCloud2::ConstPtr& cloud) {
       typename pcl::PointCloud<PointT>::Ptr xyz(new pcl::PointCloud<PointT>);
-      pcl::fromPCLPointCloud2(*cloud,*xyz);
+      pcl::fromROSMsg(*cloud,*xyz);
       PointCloudFactory::setInputCloud<PointT>(xyz);
 
       typename pcl::PointCloud<NormalT>::Ptr norms(new pcl::PointCloud<NormalT>);
-      pcl::fromPCLPointCloud2(*cloud,*norms);
+      pcl::fromROSMsg(*cloud,*norms);
       PointCloudFactory::setInputCloud<NormalT>(norms);
 
       typename pcl::PointCloud<IntensityT>::Ptr iten(new pcl::PointCloud<IntensityT>);
-      pcl::fromPCLPointCloud2(*cloud,*iten);
+      pcl::fromROSMsg(*cloud,*iten);
       PointCloudFactory::setInputCloud<IntensityT>(iten);
 }
 
@@ -374,17 +374,17 @@ osg::Geometry* osgpcl::SurfelFactoryFFI<PointT, NormalT, IntensityT>::buildGeome
 
 template<typename PointT, typename NormalT, typename IntensityT>
 inline void osgpcl::SurfelFactoryFFI<PointT, NormalT, IntensityT>::setInputCloud(
-        const pcl::PCLPointCloud2::ConstPtr& cloud) {
+        const sensor_msgs::PointCloud2::ConstPtr& cloud) {
       typename pcl::PointCloud<PointT>::Ptr xyz(new pcl::PointCloud<PointT>);
-      pcl::fromPCLPointCloud2(*cloud,*xyz);
+      pcl::fromROSMsg(*cloud,*xyz);
       PointCloudFactory::setInputCloud<PointT>(xyz);
 
       typename pcl::PointCloud<NormalT>::Ptr norms(new pcl::PointCloud<NormalT>);
-      pcl::fromPCLPointCloud2(*cloud,*norms);
+      pcl::fromROSMsg(*cloud,*norms);
       PointCloudFactory::setInputCloud<NormalT>(norms);
 
       typename pcl::PointCloud<IntensityT>::Ptr iten(new pcl::PointCloud<IntensityT>);
-      pcl::fromPCLPointCloud2(*cloud,*iten);
+      pcl::fromROSMsg(*cloud,*iten);
       PointCloudFactory::setInputCloud<IntensityT>(iten);
 }
 
@@ -411,19 +411,19 @@ osgpcl::SurfelFactoryFF<PointT, NormalT, RadiusT>::SurfelFactoryFF() {
 
 template<typename PointT, typename NormalT, typename RadiusT>
 void osgpcl::SurfelFactoryFF<PointT, NormalT, RadiusT>::setInputCloud(
-        const pcl::PCLPointCloud2::ConstPtr& cloud) {
+        const sensor_msgs::PointCloud2::ConstPtr& cloud) {
       typename pcl::PointCloud<PointT>::Ptr xyz(new pcl::PointCloud<PointT>);
-      pcl::fromPCLPointCloud2(*cloud,*xyz);
+      pcl::fromROSMsg(*cloud,*xyz);
       PointCloudFactory::setInputCloud<PointT>(xyz);
 
       if ( !boost::is_same<PointT, NormalT>::value){
           typename pcl::PointCloud<NormalT>::Ptr norms(new pcl::PointCloud<NormalT>);
-          pcl::fromPCLPointCloud2(*cloud,*norms);
+          pcl::fromROSMsg(*cloud,*norms);
           PointCloudFactory::setInputCloud<NormalT>(norms);
       }
       if ( !boost::is_same<PointT, RadiusT>::value){
           typename pcl::PointCloud<RadiusT>::Ptr norms(new pcl::PointCloud<RadiusT>);
-          pcl::fromPCLPointCloud2(*cloud,*norms);
+          pcl::fromROSMsg(*cloud,*norms);
           PointCloudFactory::setInputCloud<RadiusT>(norms);
       }
 }
